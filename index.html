@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para ti 💖</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background: radial-gradient(circle at top,#ff4b7d,#1a1a2e 70%);
+    overflow:hidden;
+}
+
+/* CONTENEDOR */
+.container{
+    text-align:center;
+    background: rgba(255,255,255,0.07);
+    backdrop-filter: blur(25px);
+    padding:50px 30px;
+    border-radius:25px;
+    box-shadow:0 20px 80px rgba(0,0,0,0.6);
+    width:420px;
+    max-width:90%;
+    animation:fadeIn 1.2s ease;
+}
+
+h1{
+    color:#fff;
+    font-size:2.2rem;
+    margin-bottom:15px;
+}
+
+p{
+    color:#ddd;
+    margin-bottom:30px;
+    line-height:1.6;
+}
+
+/* BOTONES */
+.buttons{
+    position:relative;
+    height:90px;
+}
+
+button{
+    padding:12px 25px;
+    font-size:16px;
+    border:none;
+    border-radius:30px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+#si{
+    background:linear-gradient(45deg,#ff4b7d,#ff758c);
+    color:white;
+    box-shadow:0 8px 25px rgba(255,75,125,0.6);
+}
+
+#si:hover{
+    transform:scale(1.12);
+}
+
+#no{
+    position:absolute;
+    left:60%;
+    top:10px;
+    background:rgba(255,255,255,0.2);
+    color:white;
+}
+
+/* desaparecer */
+.fade-out{
+    opacity:0;
+    transform:scale(0.4);
+}
+
+/* animación */
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(40px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+/* corazones */
+.heart{
+    position:absolute;
+    color:#ff4b7d;
+    animation:float 5s linear infinite;
+}
+
+@keyframes float{
+    from{transform:translateY(100vh); opacity:1;}
+    to{transform:translateY(-10vh); opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="contenido">
+    <h1>¿Quieres estar conmigo? 💖</h1>
+    <p>
+        No quiero prometerte algo perfecto…<br>
+        quiero ofrecerte algo real,<br>
+        donde cada momento contigo tenga sentido ✨
+    </p>
+
+    <div class="buttons">
+        <button id="si" onclick="aceptar()">Sí 💕</button>
+        <button id="no" onclick="moverNo()">No 😢</button>
+    </div>
+</div>
+
+<script>
+
+let intentos = 0;
+
+// BOTÓN NO
+function moverNo(){
+    let boton = document.getElementById("no");
+    intentos++;
+
+    if(intentos < 5){
+        let x = Math.random() * (window.innerWidth - boton.offsetWidth);
+        let y = Math.random() * (window.innerHeight - boton.offsetHeight);
+
+        boton.style.left = x + "px";
+        boton.style.top = y + "px";
+    }else{
+        boton.classList.add("fade-out");
+        setTimeout(()=> boton.style.display="none",400);
+    }
+}
+
+// ACEPTAR
+function aceptar(){
+
+    // mensaje bonito
+    document.getElementById("contenido").innerHTML = `
+        <h1>💖 Te amo 💖</h1>
+        <p style="font-size:18px; line-height:1.7;">
+            No es solo un “sí”…<br><br>
+            es el inicio de algo que quiero construir contigo ✨<br><br>
+            Te amo,<br>
+            y quiero que este sea el comienzo de nuestra historia,<br>
+            una historia real, imperfecta pero nuestra 💕<br><br>
+            Hoy empieza algo bonito… contigo 💖
+        </p>
+        <button onclick="irYoutube()" style="
+            margin-top:20px;
+            padding:12px 25px;
+            border:none;
+            border-radius:25px;
+            background:#ff4b7d;
+            color:white;
+            cursor:pointer;
+        ">
+            🎵 Escuchar nuestra canción
+        </button>
+    `;
+
+    lanzarCorazones();
+}
+
+// IR A YOUTUBE
+function irYoutube(){
+    window.open("https://youtu.be/nFl5eBA0nUg?si=ZYSYsBTUO7G5XvJi","_blank");
+}
+
+// CORAZONES
+function lanzarCorazones(){
+    setInterval(()=>{
+        let heart=document.createElement("div");
+        heart.className="heart";
+        heart.innerHTML="💖";
+        heart.style.left=Math.random()*100+"vw";
+        heart.style.fontSize=(Math.random()*20+15)+"px";
+        document.body.appendChild(heart);
+
+        setTimeout(()=>heart.remove(),5000);
+    },200);
+}
+
+</script>
+
+</body>
+</html>
